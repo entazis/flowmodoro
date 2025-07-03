@@ -1,0 +1,60 @@
+{
+  "versions": {
+    "main": {
+      "name": "Vite Flowmodoro (Main)",
+      "path": "./",
+      "framework": "vite",
+      "port": 5173,
+      "buildCommand": "npm run build",
+      "devCommand": "npm run dev",
+      "features": [
+        "Fast HMR",
+        "Lightweight",
+        "Modern build tools",
+        "SPA",
+        "Primary version"
+      ],
+      "deployment": {
+        "vercel": true,
+        "netlify": true,
+        "surge": true,
+        "github-pages": true
+      }
+    },
+    "nextjs": {
+      "name": "Next.js Flowmodoro (Backup)",
+      "path": "./versions/nextjs-flowmodoro",
+      "framework": "next",
+      "port": 3000,
+      "buildCommand": "npm run build",
+      "devCommand": "npm run dev",
+      "features": [
+        "SSR",
+        "API Routes",
+        "Built-in optimization",
+        "SEO-friendly",
+        "Backup version"
+      ],
+      "deployment": {
+        "vercel": true,
+        "netlify": true,
+        "docker": true
+      }
+    }
+  },
+  "shared": {
+    "timerLogic": "./shared/timer-logic.ts",
+    "types": "./shared/types.ts",
+    "utils": "./shared/utils.ts"
+  },
+  "management": {
+    "syncScript": "./scripts/manage-versions.sh",
+    "description": "Vite version is now the main implementation"
+  },
+  "branching": {
+    "main": "Stable releases (Vite-based)",
+    "feature/vite-*": "Main version specific features",
+    "feature/nextjs-*": "Next.js backup version features",
+    "feature/shared-*": "Features for both versions"
+  }
+}

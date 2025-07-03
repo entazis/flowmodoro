@@ -1,149 +1,36 @@
-/**
- * Reusable Badge component for status indicators
- */
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
-import React from 'react';
+import { cn } from "@/lib/utils"
 
-interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  /** Badge variant */
-  variant?: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
-  /** Badge size */
-  size?: 'sm' | 'md' | 'lg';
-  /** Badge shape */
-  shape?: 'rounded' | 'pill';
-  /** Dot indicator instead of text */
-  dot?: boolean;
-}
-
-/**
- * Badge component for status indicators and labels
- */
-export function Badge({
-  children,
-  variant = 'default',
-  size = 'md',
-  shape = 'rounded',
-  dot = false,
-  className = '',
-  ...props
-}: BadgeProps) {
-  const baseClasses = [
-    'inline-flex items-center justify-center font-medium',
-    'transition-all duration-200 ease-in-out',
-    'select-none'
-  ];
-
-  const variantClasses = {
-    default: [
-      'bg-gray-100 text-gray-800',
-      'dark:bg-gray-800 dark:text-gray-200'
-    ].join(' '),
-    
-    primary: [
-      'bg-blue-100 text-blue-800',
-      'dark:bg-blue-900/30 dark:text-blue-400'
-    ].join(' '),
-    
-    success: [
-      'bg-green-100 text-green-800',
-      'dark:bg-green-900/30 dark:text-green-400'
-    ].join(' '),
-    
-    warning: [
-      'bg-yellow-100 text-yellow-800',
-      'dark:bg-yellow-900/30 dark:text-yellow-400'
-    ].join(' '),
-    
-    danger: [
-      'bg-red-100 text-red-800',
-      'dark:bg-red-900/30 dark:text-red-400'
-    ].join(' '),
-    
-    info: [
-      'bg-cyan-100 text-cyan-800',
-      'dark:bg-cyan-900/30 dark:text-cyan-400'
-    ].join(' ')
-  };
-
-  const sizeClasses = {
-    sm: dot ? 'h-2 w-2' : 'px-2 py-1 text-xs',
-    md: dot ? 'h-2.5 w-2.5' : 'px-2.5 py-1 text-xs',
-    lg: dot ? 'h-3 w-3' : 'px-3 py-1.5 text-sm'
-  };
-
-  const shapeClasses = {
-    rounded: 'rounded-md',
-    pill: 'rounded-full'
-  };
-
-  const allClasses = [
-    ...baseClasses,
-    variantClasses[variant],
-    sizeClasses[size],
-    dot ? 'rounded-full' : shapeClasses[shape],
-    className
-  ].filter(Boolean).join(' ');
-
-  if (dot) {
-    return (
-      <span className={allClasses} {...props} />
-    );
+const badgeVariants = cva(
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default:
+          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        outline: "text-foreground",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
   }
+)
 
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+function Badge({ className, variant, ...props }: BadgeProps) {
   return (
-    <span className={allClasses} {...props}>
-      {children}
-    </span>
-  );
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
 }
 
-interface StatusBadgeProps {
-  /** Status value */
-  status: 'idle' | 'working' | 'break';
-  /** Badge size */
-  size?: 'sm' | 'md' | 'lg';
-}
-
-/**
- * Specialized badge for timer status
- */
-export function StatusBadge({ status, size = 'md' }: StatusBadgeProps) {
-  const statusConfig = {
-    idle: {
-      variant: 'default' as const,
-      label: 'Ready',
-      dot: false
-    },
-    working: {
-      variant: 'primary' as const,
-      label: 'Working',
-      dot: true
-    },
-    break: {
-      variant: 'success' as const,
-      label: 'Break',
-      dot: true
-    }
-  };
-
-  const config = statusConfig[status];
-
-  return (
-    <div className="flex items-center gap-2">
-      {config.dot && (
-        <Badge
-          variant={config.variant}
-          size={size}
-          dot
-        />
-      )}
-      <Badge
-        variant={config.variant}
-        size={size}
-        shape="pill"
-      >
-        {config.label}
-      </Badge>
-    </div>
-  );
-} 
+export { Badge, badgeVariants }
