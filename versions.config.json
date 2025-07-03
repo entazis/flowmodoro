@@ -42,11 +42,6 @@
       }
     }
   },
-  "shared": {
-    "timerLogic": "./shared/timer-logic.ts",
-    "types": "./shared/types.ts",
-    "utils": "./shared/utils.ts"
-  },
   "management": {
     "syncScript": "./scripts/manage-versions.sh",
     "description": "Vite version is now the main implementation"
