@@ -213,7 +213,7 @@ const Index = () => {
               disabled={state === 'breaking' && isRunning}
               size="lg"
               className={`px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-                state === 'working' ? 'bg-red-600 hover:bg-red-700' :
+                state === 'working' ? 'bg-blue-600 hover:bg-blue-700' :
                 state === 'breaking' ? 'bg-orange-500 hover:bg-orange-600' :
                 'bg-green-600 hover:bg-green-700'
               }`}
