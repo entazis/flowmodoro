@@ -13,6 +13,12 @@ const Index = () => {
   const [breakTime, setBreakTime] = useState(0); // in seconds
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Timestamp-based timer references
+  const startTimeRef = useRef<number | null>(null);
+  const pausedTimeRef = useRef<number>(0);
+  const breakStartTimeRef = useRef<number | null>(null);
+  const breakDurationRef = useRef<number>(0);
 
   const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
@@ -25,25 +31,59 @@ const Index = () => {
     return `${minutes}:${secs.toString().padStart(2, '0')}`;
   };
 
+  const updateTimer = () => {
+    const now = Date.now();
+    
+    if (state === 'working' && startTimeRef.current) {
+      const elapsed = Math.floor((now - startTimeRef.current) / 1000) + pausedTimeRef.current;
+      setWorkTime(elapsed);
+    } else if (state === 'breaking' && breakStartTimeRef.current) {
+      const elapsed = Math.floor((now - breakStartTimeRef.current) / 1000);
+      const remaining = Math.max(0, breakDurationRef.current - elapsed);
+      setBreakTime(remaining);
+      
+      if (remaining <= 0) {
+        // Break finished - play sound notification
+        playNotificationSound();
+        setIsRunning(false);
+        setState('idle');
+        breakStartTimeRef.current = null;
+        breakDurationRef.current = 0;
+      }
+    }
+  };
+
   const startTimer = () => {
+    const now = Date.now();
+    
     if (state === 'idle') {
       // Start work session
       setState('working');
       setWorkTime(0);
       setIsRunning(true);
+      startTimeRef.current = now;
+      pausedTimeRef.current = 0;
     } else if (state === 'working') {
       // Stop work and prepare break
       setIsRunning(false);
       const calculatedBreakTime = Math.max(Math.floor(workTime / 5), 60); // Minimum 1 minute break
       setBreakTime(calculatedBreakTime);
       setState('breaking');
+      breakDurationRef.current = calculatedBreakTime;
+      startTimeRef.current = null;
     } else if (state === 'breaking') {
       // Start break countdown
       setIsRunning(true);
+      breakStartTimeRef.current = now;
     }
   };
 
   const pauseTimer = () => {
+    if (state === 'working' && startTimeRef.current) {
+      // Save the elapsed time when pausing
+      pausedTimeRef.current = Math.floor((Date.now() - startTimeRef.current) / 1000) + pausedTimeRef.current;
+      startTimeRef.current = null;
+    }
     setIsRunning(false);
   };
 
@@ -52,26 +92,40 @@ const Index = () => {
     setState('idle');
     setWorkTime(0);
     setBreakTime(0);
+    startTimeRef.current = null;
+    pausedTimeRef.current = 0;
+    breakStartTimeRef.current = null;
+    breakDurationRef.current = 0;
   };
+
+  // Handle page visibility changes
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Tab became hidden - no special action needed since we use timestamps
+        return;
+      } else {
+        // Tab became visible again - update timer immediately
+        if (isRunning) {
+          updateTimer();
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [isRunning, state]);
+
+  // Resume timer when returning to work state
+  useEffect(() => {
+    if (state === 'working' && isRunning && !startTimeRef.current) {
+      startTimeRef.current = Date.now();
+    }
+  }, [state, isRunning]);
 
   useEffect(() => {
     if (isRunning) {
-      intervalRef.current = setInterval(() => {
-        if (state === 'working') {
-          setWorkTime(prev => prev + 1);
-        } else if (state === 'breaking') {
-          setBreakTime(prev => {
-            if (prev <= 1) {
-              // Break finished - play sound notification
-              playNotificationSound();
-              setIsRunning(false);
-              setState('idle');
-              return 0;
-            }
-            return prev - 1;
-          });
-        }
-      }, 1000);
+      intervalRef.current = setInterval(updateTimer, 1000);
     } else {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
