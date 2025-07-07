@@ -10,8 +10,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const baseName = import.meta.env.VITE_BASE_PATH || '/';
-  
+  const basePath = import.meta.env.VITE_BASE_PATH || "/";
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider
@@ -23,7 +23,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter basename={baseName}>
+          <BrowserRouter basename={basePath}>
             <Routes>
               <Route path="/" element={<Index />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
