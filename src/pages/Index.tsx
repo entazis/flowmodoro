@@ -2,7 +2,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { playNotificationSound } from '@/utils/audioUtils';
-import { Pause, Play, RotateCcw } from 'lucide-react';
+import { Play, RotateCcw, Square } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 type TimerState = 'idle' | 'working' | 'breaking';
@@ -78,15 +78,6 @@ const Index = () => {
     }
   };
 
-  const pauseTimer = () => {
-    if (state === 'working' && startTimeRef.current) {
-      // Save the elapsed time when pausing
-      pausedTimeRef.current = Math.floor((Date.now() - startTimeRef.current) / 1000) + pausedTimeRef.current;
-      startTimeRef.current = null;
-    }
-    setIsRunning(false);
-  };
-
   const resetTimer = () => {
     setIsRunning(false);
     setState('idle');
@@ -153,9 +144,9 @@ const Index = () => {
   const getStateText = () => {
     switch (state) {
       case 'working':
-        return isRunning ? 'Working...' : 'Work Session';
+        return 'Working...';
       case 'breaking':
-        return isRunning ? 'Break Time' : `Break Ready: ${formatTime(breakTime)}`;
+        return isRunning ? 'Break Time' : `Break Ready`;
       default:
         return 'Ready to Focus';
     }
@@ -163,9 +154,14 @@ const Index = () => {
 
   const getButtonText = () => {
     if (state === 'idle') return 'Start Work';
-    if (state === 'working') return isRunning ? 'Finish Work' : 'Resume';
-    if (state === 'breaking') return isRunning ? 'Pause Break' : 'Start Break';
+    if (state === 'working') return 'Finish Work';
+    if (state === 'breaking') return 'Start Break';
     return 'Start';
+  };
+
+  const getButtonIcon = () => {
+    if (state === 'working') return <Square className="w-5 h-5 mr-2" />;
+    return <Play className="w-5 h-5 mr-2" />;
   };
 
   const displayTime = state === 'working' ? workTime : (state === 'breaking' ? breakTime : 0);
@@ -214,19 +210,15 @@ const Index = () => {
           <div className="flex justify-center gap-4">
             <Button
               onClick={startTimer}
-              disabled={state === 'breaking' && breakTime === 0}
+              disabled={state === 'breaking' && isRunning}
               size="lg"
               className={`px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-                state === 'working' ? 'bg-blue-600 hover:bg-blue-700' :
+                state === 'working' ? 'bg-red-600 hover:bg-red-700' :
                 state === 'breaking' ? 'bg-orange-500 hover:bg-orange-600' :
                 'bg-green-600 hover:bg-green-700'
               }`}
             >
-              {isRunning && (state === 'working' || state === 'breaking') ? (
-                <Pause className="w-5 h-5 mr-2" />
-              ) : (
-                <Play className="w-5 h-5 mr-2" />
-              )}
+              {getButtonIcon()}
               {getButtonText()}
             </Button>
 
@@ -236,6 +228,7 @@ const Index = () => {
                 variant="outline"
                 size="lg"
                 className="px-6 py-4 transition-all duration-300 transform hover:scale-105"
+                title={state === 'breaking' && isRunning ? 'Skip Break' : 'Reset'}
               >
                 <RotateCcw className="w-5 h-5" />
               </Button>
