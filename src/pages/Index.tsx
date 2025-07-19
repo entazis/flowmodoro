@@ -199,7 +199,7 @@ const Index = () => {
               {formatTime(displayTime)}
             </div>
             
-            {state === 'working' && workTime > 0 && (
+            {state === 'working'  && (
               <div className="text-sm text-muted-foreground">
                 Break will be: {formatTime(Math.max(Math.floor(workTime / 5), 60))}
               </div>
