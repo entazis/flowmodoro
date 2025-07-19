@@ -191,7 +191,7 @@ const Index = () => {
 
           {/* Timer Display */}
           <div className="space-y-6">
-            <div className={`text-7xl font-display font-semibold transition-colors duration-700 ${
+            <div className={`text-7xl font-mono font-bold tabular-nums transition-colors duration-700 ${
               state === 'working' ? 'text-blue dark:text-blue' : 
               state === 'breaking' ? 'text-orange dark:text-orange' : 
               'text-muted-foreground'
