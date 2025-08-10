@@ -1,6 +1,4 @@
 
-import { Moon, Sun, Monitor } from "lucide-react"
-import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -8,6 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Monitor, Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
@@ -22,15 +22,24 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
-        <DropdownMenuItem onClick={() => setTheme("light")} className={theme === "light" ? "bg-gray-100 dark:bg-gray-700" : ""}>
+        <DropdownMenuItem 
+          onClick={() => setTheme("light")} 
+          className={`hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 transition-colors ${theme === "light" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
+        >
           <Sun className="mr-2 h-4 w-4" />
           <span>Light</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")} className={theme === "dark" ? "bg-gray-100 dark:bg-gray-700" : ""}>
+        <DropdownMenuItem 
+          onClick={() => setTheme("dark")} 
+          className={`hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 transition-colors ${theme === "dark" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
+        >
           <Moon className="mr-2 h-4 w-4" />
           <span>Dark</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")} className={theme === "system" ? "bg-gray-100 dark:bg-gray-700" : ""}>
+        <DropdownMenuItem 
+          onClick={() => setTheme("system")} 
+          className={`hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 transition-colors ${theme === "system" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
+        >
           <Monitor className="mr-2 h-4 w-4" />
           <span>System</span>
         </DropdownMenuItem>
