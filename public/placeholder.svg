@@ -1,1 +1,126 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" fill="none"><rect width="1200" height="1200" fill="#EAEAEA" rx="3"/><g opacity=".5"><g opacity=".5"><path fill="#FAFAFA" d="M600.709 736.5c-75.454 0-136.621-61.167-136.621-136.62 0-75.454 61.167-136.621 136.621-136.621 75.453 0 136.62 61.167 136.62 136.621 0 75.453-61.167 136.62-136.62 136.62Z"/><path stroke="#C9C9C9" stroke-width="2.418" d="M600.709 736.5c-75.454 0-136.621-61.167-136.621-136.62 0-75.454 61.167-136.621 136.621-136.621 75.453 0 136.62 61.167 136.62 136.621 0 75.453-61.167 136.62-136.62 136.62Z"/></g><path stroke="url(#a)" stroke-width="2.418" d="M0-1.209h553.581" transform="scale(1 -1) rotate(45 1163.11 91.165)"/><path stroke="url(#b)" stroke-width="2.418" d="M404.846 598.671h391.726"/><path stroke="url(#c)" stroke-width="2.418" d="M599.5 795.742V404.017"/><path stroke="url(#d)" stroke-width="2.418" d="m795.717 796.597-391.441-391.44"/><path fill="#fff" d="M600.709 656.704c-31.384 0-56.825-25.441-56.825-56.824 0-31.384 25.441-56.825 56.825-56.825 31.383 0 56.824 25.441 56.824 56.825 0 31.383-25.441 56.824-56.824 56.824Z"/><g clip-path="url(#e)"><path fill="#666" fill-rule="evenodd" d="M616.426 586.58h-31.434v16.176l3.553-3.554.531-.531h9.068l.074-.074 8.463-8.463h2.565l7.18 7.181V586.58Zm-15.715 14.654 3.698 3.699 1.283 1.282-2.565 2.565-1.282-1.283-5.2-5.199h-6.066l-5.514 5.514-.073.073v2.876a2.418 2.418 0 0 0 2.418 2.418h26.598a2.418 2.418 0 0 0 2.418-2.418v-8.317l-8.463-8.463-7.181 7.181-.071.072Zm-19.347 5.442v4.085a6.045 6.045 0 0 0 6.046 6.045h26.598a6.044 6.044 0 0 0 6.045-6.045v-7.108l1.356-1.355-1.282-1.283-.074-.073v-17.989h-38.689v23.43l-.146.146.146.147Z" clip-rule="evenodd"/></g><path stroke="#C9C9C9" stroke-width="2.418" d="M600.709 656.704c-31.384 0-56.825-25.441-56.825-56.824 0-31.384 25.441-56.825 56.825-56.825 31.383 0 56.824 25.441 56.824 56.825 0 31.383-25.441 56.824-56.824 56.824Z"/></g><defs><linearGradient id="a" x1="554.061" x2="-.48" y1=".083" y2=".087" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><linearGradient id="b" x1="796.912" x2="404.507" y1="599.963" y2="599.965" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><linearGradient id="c" x1="600.792" x2="600.794" y1="403.677" y2="796.082" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><linearGradient id="d" x1="404.85" x2="796.972" y1="403.903" y2="796.02" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9" stop-opacity="0"/><stop offset=".208" stop-color="#C9C9C9"/><stop offset=".792" stop-color="#C9C9C9"/><stop offset="1" stop-color="#C9C9C9" stop-opacity="0"/></linearGradient><clipPath id="e"><path fill="#fff" d="M581.364 580.535h38.689v38.689h-38.689z"/></clipPath></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" fill="none">
+  <!-- Background with gradient -->
+  <rect width="1200" height="1200" fill="url(#backgroundGradient)" rx="24"/>
+  
+  <!-- Main circular flow element -->
+  <circle cx="600" cy="600" r="280" fill="url(#mainGradient)" opacity="0.9"/>
+  <circle cx="600" cy="600" r="280" fill="none" stroke="url(#strokeGradient)" stroke-width="4" opacity="0.6"/>
+  
+  <!-- Inner flow circles representing the timer concept -->
+  <circle cx="600" cy="600" r="180" fill="url(#innerGradient)" opacity="0.8"/>
+  <circle cx="600" cy="600" r="120" fill="url(#coreGradient)" opacity="0.9"/>
+  
+  <!-- Flow lines representing the natural rhythm -->
+  <path d="M 400 600 Q 500 500 600 600 Q 700 700 800 600" stroke="url(#flowGradient)" stroke-width="6" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M 600 400 Q 700 500 600 600 Q 500 700 600 800" stroke="url(#flowGradient2)" stroke-width="6" fill="none" opacity="0.7" stroke-linecap="round"/>
+  
+  <!-- Central timer icon -->
+  <g transform="translate(600, 600)">
+    <!-- Clock face -->
+    <circle r="60" fill="white" opacity="0.95"/>
+    <circle r="60" fill="none" stroke="url(#clockStroke)" stroke-width="3"/>
+    
+    <!-- Clock hands representing flow -->
+    <line x1="0" y1="0" x2="0" y2="-35" stroke="url(#handGradient)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="25" y2="0" stroke="url(#handGradient)" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Center dot -->
+    <circle r="4" fill="url(#centerGradient)"/>
+  </g>
+  
+  <!-- Floating elements representing productivity -->
+  <circle cx="450" cy="350" r="12" fill="url(#accentGradient1)" opacity="0.8"/>
+  <circle cx="750" cy="850" r="16" fill="url(#accentGradient2)" opacity="0.8"/>
+  <circle cx="850" cy="450" r="10" fill="url(#accentGradient3)" opacity="0.8"/>
+  <circle cx="350" cy="750" r="14" fill="url(#accentGradient4)" opacity="0.8"/>
+  
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#grid)" opacity="0.3"/>
+  
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(221, 83%, 53%);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:hsl(239, 84%, 67%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(262, 83%, 58%);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Main circle gradient -->
+    <radialGradient id="mainGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.2);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.05);stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Stroke gradient -->
+    <linearGradient id="strokeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Inner gradients -->
+    <radialGradient id="innerGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.15);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.03);stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.25);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.08);stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Flow line gradients -->
+    <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.6);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="flowGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.6);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Clock elements -->
+    <linearGradient id="clockStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(221, 83%, 53%);stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:hsl(239, 84%, 67%);stop-opacity:0.8" />
+    </linearGradient>
+    
+    <linearGradient id="handGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(221, 83%, 53%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(239, 84%, 67%);stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:hsl(262, 83%, 58%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(221, 83%, 53%);stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Accent gradients -->
+    <radialGradient id="accentGradient1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(25, 95%, 53%);stop-opacity:0.6" />
+    </radialGradient>
+    
+    <radialGradient id="accentGradient2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(330, 81%, 60%);stop-opacity:0.6" />
+    </radialGradient>
+    
+    <radialGradient id="accentGradient3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(142, 71%, 45%);stop-opacity:0.6" />
+    </radialGradient>
+    
+    <radialGradient id="accentGradient4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(239, 84%, 67%);stop-opacity:0.6" />
+    </radialGradient>
+  </defs>
+</svg>
