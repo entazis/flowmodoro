@@ -23,3 +23,8 @@ body,
   font-size: 3.75rem;
   line-height: 1;
 }
+
+/* The educational info cards add value on the web but overflow the popup; drop them here. */
+.flowmodoro-popup [data-popup-hide] {
+  display: none;
+}

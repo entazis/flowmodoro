@@ -116,7 +116,7 @@ const Index = () => {
         </Card>
 
         {/* Info Section */}
-        <div className="text-center space-y-6 text-sm text-muted-foreground">
+        <div data-popup-hide className="text-center space-y-6 text-sm text-muted-foreground">
           <div className="grid grid-cols-2 gap-4">
             <div className="p-6 rounded-2xl bg-gradient-to-br from-blue/10 to-indigo/10 dark:from-blue/5 dark:to-indigo/5 backdrop-blur-sm border border-blue/20 dark:border-blue/10">
               <div className="font-semibold text-blue dark:text-blue mb-2 font-display">Work Flow</div>
