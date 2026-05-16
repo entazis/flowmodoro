@@ -10,6 +10,8 @@
     "build:production": "vite build --mode production",
     "build:staging": "vite build --mode staging",
     "build:root": "VITE_BASE_PATH=/ vite build",
+    "dev:extension": "vite --config vite.extension.config.ts",
+    "build:extension": "vite build --config vite.extension.config.ts",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -31,8 +33,10 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@crxjs/vite-plugin": "^2.4.0",
     "@eslint/js": "^9.9.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/chrome": "^0.1.42",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

@@ -1,0 +1,25 @@
+/* Chrome popup viewport. Width must be set explicitly; height is bounded by Chrome (max 600). */
+html,
+body,
+#root {
+  width: 400px;
+  height: 600px;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* The Index page uses min-h-screen + p-4 — keep the layout, just constrain padding inside the popup. */
+.flowmodoro-popup > div {
+  min-height: 600px;
+  padding: 1rem;
+}
+
+/* Shrink the largest type a touch so the timer + controls fit in 400×600 without scroll. */
+.flowmodoro-popup h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.flowmodoro-popup .text-7xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
