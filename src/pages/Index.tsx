@@ -50,7 +50,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         {/* Header with Theme Toggle */}
-        <div className="text-center space-y-3 relative">
+        <div data-popup-hide className="text-center space-y-3 relative">
           <div className="absolute top-0 right-0">
             <ThemeToggle />
           </div>

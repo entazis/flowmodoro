@@ -1,30 +1,31 @@
-/* Chrome popup viewport. Width must be set explicitly; height is bounded by Chrome (max 600). */
+/* Chrome auto-sizes a popup to its content (up to 800x600). Set the width; let height follow the card. */
 html,
 body,
 #root {
-  width: 400px;
-  height: 600px;
+  width: 360px;
   margin: 0;
-  overflow: hidden;
 }
 
-/* The Index page uses min-h-screen + p-4 — keep the layout, just constrain padding inside the popup. */
+/* Keep Index.tsx's gradient background; just drop the full-screen min-height and tighten the padding. */
 .flowmodoro-popup > div {
-  min-height: 600px;
-  padding: 1rem;
+  min-height: 0;
+  padding: 0.75rem;
 }
 
-/* Shrink the largest type a touch so the timer + controls fit in 400×600 without scroll. */
-.flowmodoro-popup h1 {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+/* The hidden header is still a DOM sibling, so Tailwind's space-y-8 on the outer container
+   leaks a top margin onto the card. Cancel it on the outer container ONLY — not the card's
+   internal space-y-8 (which spaces the pill, timer, and controls). */
+.flowmodoro-popup > div > .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0;
 }
+
+/* Shrink the 7xl timer slightly so the card sits comfortably in a 360px popup. */
 .flowmodoro-popup .text-7xl {
   font-size: 3.75rem;
   line-height: 1;
 }
 
-/* The educational info cards add value on the web but overflow the popup; drop them here. */
+/* Header (title + subtitle + theme toggle) and info cards are decorative — hide in the popup. */
 .flowmodoro-popup [data-popup-hide] {
   display: none;
 }
