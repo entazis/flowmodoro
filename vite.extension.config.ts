@@ -10,6 +10,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'dist-extension'),
     emptyOutDir: true,
+    assetsInlineLimit: 0,
     rollupOptions: {
       input: {
         popup: path.resolve(__dirname, 'extension/popup.html'),

@@ -1,14 +1,71 @@
+/// <reference types="vite/client" />
 import {
   BREAK_END_ALARM,
   STORAGE_KEY,
   TimerSnapshot,
   initialSnapshot,
 } from '../src/lib/timer';
+import iconOrange16 from './icons/icon-16-orange.png?url';
+import iconOrange32 from './icons/icon-32-orange.png?url';
+import iconOrange48 from './icons/icon-48-orange.png?url';
+import iconOrange128 from './icons/icon-128-orange.png?url';
+import iconBlueRun16 from './icons/icon-16-run.png?url';
+import iconBlueRun32 from './icons/icon-32-run.png?url';
+import iconBlueRun48 from './icons/icon-48-run.png?url';
+import iconBlueRun128 from './icons/icon-128-run.png?url';
+import iconOrangeRun16 from './icons/icon-16-orange-run.png?url';
+import iconOrangeRun32 from './icons/icon-32-orange-run.png?url';
+import iconOrangeRun48 from './icons/icon-48-orange-run.png?url';
+import iconOrangeRun128 from './icons/icon-128-orange-run.png?url';
 
 const OFFSCREEN_URL = 'offscreen.html';
 const CHIME_LIFETIME_MS = 2500;
 
 const clearAlarm = () => chrome.alarms.clear(BREAK_END_ALARM);
+
+const ICON_SETS = {
+  idle: {
+    16: 'icons/icon-16.png',
+    32: 'icons/icon-32.png',
+    48: 'icons/icon-48.png',
+    128: 'icons/icon-128.png',
+  },
+  working: {
+    16: iconBlueRun16,
+    32: iconBlueRun32,
+    48: iconBlueRun48,
+    128: iconBlueRun128,
+  },
+  breakReady: {
+    16: iconOrange16,
+    32: iconOrange32,
+    48: iconOrange48,
+    128: iconOrange128,
+  },
+  breakRunning: {
+    16: iconOrangeRun16,
+    32: iconOrangeRun32,
+    48: iconOrangeRun48,
+    128: iconOrangeRun128,
+  },
+} as const;
+
+const pickIconSet = (snap: TimerSnapshot) => {
+  if (snap.status === 'working') return ICON_SETS.working;
+  if (snap.status === 'breaking') {
+    return snap.isRunning ? ICON_SETS.breakRunning : ICON_SETS.breakReady;
+  }
+  return ICON_SETS.idle;
+};
+
+const applyAction = async (snap: TimerSnapshot) => {
+  try {
+    await chrome.action.setIcon({ path: pickIconSet(snap) });
+    await chrome.action.setBadgeText({ text: '' });
+  } catch (error) {
+    console.warn('Flowmodoro: failed to update toolbar icon', error);
+  }
+};
 
 const ensureOffscreenDocument = async () => {
   const existing = await chrome.runtime.getContexts({
@@ -77,22 +134,26 @@ chrome.runtime.onInstalled.addListener(async () => {
   if (!(STORAGE_KEY in stored)) {
     await chrome.storage.local.set({ [STORAGE_KEY]: { ...initialSnapshot } });
   } else {
-    scheduleBreakEnd(stored[STORAGE_KEY] as TimerSnapshot);
+    const snap = stored[STORAGE_KEY] as TimerSnapshot;
+    scheduleBreakEnd(snap);
+    applyAction(snap);
   }
 });
 
 chrome.runtime.onStartup.addListener(async () => {
   const stored = await chrome.storage.local.get(STORAGE_KEY);
-  if (STORAGE_KEY in stored) {
-    scheduleBreakEnd(stored[STORAGE_KEY] as TimerSnapshot);
-  }
+  const snap = (stored[STORAGE_KEY] as TimerSnapshot | undefined) ?? initialSnapshot;
+  scheduleBreakEnd(snap);
+  applyAction(snap);
 });
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local' || !(STORAGE_KEY in changes)) return;
-  const next = changes[STORAGE_KEY].newValue as TimerSnapshot | undefined;
-  if (!next) return clearAlarm();
+  const next =
+    (changes[STORAGE_KEY].newValue as TimerSnapshot | undefined) ??
+    initialSnapshot;
   scheduleBreakEnd(next);
+  applyAction(next);
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
