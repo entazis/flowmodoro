@@ -5,7 +5,40 @@ import {
   initialSnapshot,
 } from '../src/lib/timer';
 
+const OFFSCREEN_URL = 'offscreen.html';
+const CHIME_LIFETIME_MS = 2500;
+
 const clearAlarm = () => chrome.alarms.clear(BREAK_END_ALARM);
+
+const ensureOffscreenDocument = async () => {
+  const existing = await chrome.runtime.getContexts({
+    contextTypes: [chrome.runtime.ContextType.OFFSCREEN_DOCUMENT],
+  });
+  if (existing.length > 0) return;
+  await chrome.offscreen.createDocument({
+    url: OFFSCREEN_URL,
+    reasons: [chrome.offscreen.Reason.AUDIO_PLAYBACK],
+    justification: 'Play notification chime when the break timer ends.',
+  });
+};
+
+const playBreakEndSound = async () => {
+  try {
+    await ensureOffscreenDocument();
+    await chrome.runtime.sendMessage({
+      target: 'offscreen',
+      type: 'play-break-end-sound',
+    });
+  } catch (error) {
+    console.warn('Flowmodoro: failed to play break-end sound', error);
+  } finally {
+    setTimeout(() => {
+      chrome.offscreen.closeDocument().catch(() => {
+        // No-op: document may already be closed.
+      });
+    }, CHIME_LIFETIME_MS);
+  }
+};
 
 const scheduleBreakEnd = (snap: TimerSnapshot) => {
   if (
@@ -24,7 +57,12 @@ const scheduleBreakEnd = (snap: TimerSnapshot) => {
 };
 
 const endBreak = async () => {
+  const stored = await chrome.storage.local.get(STORAGE_KEY);
+  const snap = stored[STORAGE_KEY] as TimerSnapshot | undefined;
+  // Bail if break was already ended (e.g. via manual reset from the popup).
+  if (!snap || snap.status !== 'breaking' || !snap.isRunning) return;
   await chrome.storage.local.set({ [STORAGE_KEY]: { ...initialSnapshot } });
+  await playBreakEndSound();
   chrome.notifications.create({
     type: 'basic',
     iconUrl: 'icons/icon-128.png',

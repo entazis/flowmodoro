@@ -130,11 +130,15 @@ export const useTimer = (): TimerApi => {
         const remaining = computeBreakRemaining(snap, now);
         setBreakTime(remaining);
         if (remaining <= 0) {
-          // Only the active context plays sound. Background worker also notifies via OS.
-          if (!getChrome()) playNotificationSound();
-          commit({
-            ...initialSnapshot,
-          });
+          if (!getChrome()) {
+            // Single-page (no service worker): play sound and reset locally.
+            playNotificationSound();
+            commit({ ...initialSnapshot });
+          }
+          // Extension: defer to the background alarm so the chime plays via
+          // the offscreen document regardless of whether the popup is open,
+          // and a manual reset (which also writes initial) cannot be mistaken
+          // for a natural end.
         }
       }
     };

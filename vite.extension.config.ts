@@ -13,6 +13,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: path.resolve(__dirname, 'extension/popup.html'),
+        offscreen: path.resolve(__dirname, 'extension/offscreen.html'),
       },
     },
   },
