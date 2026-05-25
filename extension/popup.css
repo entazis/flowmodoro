@@ -25,6 +25,18 @@ body,
   line-height: 1;
 }
 
+/* Theme toggle floats top-right of the popup. */
+.flowmodoro-popup {
+  position: relative;
+}
+
+.popup-theme-toggle {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+}
+
 /* Header (title + subtitle + theme toggle) and info cards are decorative — hide in the popup. */
 .flowmodoro-popup [data-popup-hide] {
   display: none;

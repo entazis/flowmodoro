@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import Index from '@/pages/Index';
 import '@/index.css';
@@ -14,6 +15,9 @@ const PopupApp = () => (
   >
     <TooltipProvider>
       <div className="flowmodoro-popup">
+        <div className="popup-theme-toggle">
+          <ThemeToggle />
+        </div>
         <Index />
       </div>
     </TooltipProvider>
