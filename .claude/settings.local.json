@@ -1,7 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
-    "allow": ["Bash", "Edit", "Read", "WebFetch", "Bash(*)", "Edit(*)"]
+    "allow": [
+      "Bash",
+      "Edit",
+      "Read",
+      "WebFetch",
+      "Bash(*)",
+      "Edit(*)",
+      "WebSearch"
+    ]
   },
   "defaultMode": "acceptEdits"
 }
