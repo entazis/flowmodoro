@@ -120,12 +120,14 @@ const endBreak = async () => {
   if (!snap || snap.status !== 'breaking' || !snap.isRunning) return;
   await chrome.storage.local.set({ [STORAGE_KEY]: { ...initialSnapshot } });
   await playBreakEndSound();
-  chrome.notifications.create({
+  chrome.notifications.create('break-end', {
     type: 'basic',
     iconUrl: 'icons/icon-128.png',
     title: 'Break finished',
     message: 'Back to flow when you are ready.',
     priority: 2,
+  }, () => {
+    setTimeout(() => chrome.notifications.clear('break-end'), 7000);
   });
 };
 
