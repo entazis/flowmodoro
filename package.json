@@ -12,7 +12,7 @@
     "build:root": "VITE_BASE_PATH=/ vite build",
     "dev:extension": "vite --config vite.extension.config.ts",
     "build:extension": "vite build --config vite.extension.config.ts",
-    "package:extension": "npm run build:extension && rm -f flowmodoro-extension-v$npm_package_version.zip && cd dist-extension && zip -r ../flowmodoro-extension-v$npm_package_version.zip .",
+    "package:extension": "npm run build:extension && cd dist-extension && bestzip ../flowmodoro-extension-v$npm_package_version.zip *",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -43,6 +43,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
+    "bestzip": "^3.0.1",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
