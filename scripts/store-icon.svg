@@ -1,0 +1,16 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="0.5" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+  <!-- faint full ring -->
+  <circle cx="64" cy="64" r="34" fill="none" stroke="#ffffff" stroke-opacity="0.32" stroke-width="8"/>
+  <!-- 270 deg progress arc (12 o'clock -> 9 o'clock, clockwise) -->
+  <path d="M 64 30 A 34 34 0 1 1 30 64" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+  <!-- play / focus mark -->
+  <path d="M 56 50 L 82 64 L 56 78 Z" fill="#ffffff" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/>
+</svg>
