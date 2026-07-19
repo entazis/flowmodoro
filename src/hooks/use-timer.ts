@@ -130,15 +130,14 @@ export const useTimer = (): TimerApi => {
         const remaining = computeBreakRemaining(snap, now);
         setBreakTime(remaining);
         if (remaining <= 0) {
-          if (!getChrome()) {
-            // Single-page (no service worker): play sound and reset locally.
-            playNotificationSound();
-            commit({ ...initialSnapshot });
-          }
-          // Extension: defer to the background alarm so the chime plays via
-          // the offscreen document regardless of whether the popup is open,
-          // and a manual reset (which also writes initial) cannot be mistaken
-          // for a natural end.
+          // End the break here whenever this page is alive to see it happen —
+          // single-page and open popup alike. chrome.alarms delivery is coarse
+          // for packed extensions (seconds to tens of seconds, non-deterministic),
+          // so waiting on the background alarm made an open popup sit visibly
+          // past zero. Writing the snapshot flips the UI immediately and the
+          // background clears the pending alarm when it sees the change.
+          playNotificationSound();
+          commit({ ...initialSnapshot });
         }
       }
     };
