@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Flowmodoro",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A flexible flow-state timer. Work until focus fades, then take a break proportional to your work time.",
   "action": {
     "default_popup": "popup.html",
